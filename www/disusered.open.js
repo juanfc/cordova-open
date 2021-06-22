@@ -29,7 +29,17 @@ exports.open = function(uri, success, error, progress, trustAllCertificates) {
          onError.bind(this, error), 'Open', 'open', [uri]);
   }
 };
+exports.shareFile = function(uri, success, error, progress, trustAllCertificates) {
+  if (!uri || arguments.length === 0) { return false; }
 
+  if (uri.match('http')) {
+    downloadAndOpen(uri, success, error, progress, trustAllCertificates);
+  } else {
+    uri = encodeURI(uri);
+    exec(onSuccess.bind(this, uri, success),
+         onError.bind(this, error), 'Open', 'sharefile', [uri]);
+  }
+};
 /**
  * downloadAndOpen
  *

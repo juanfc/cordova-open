@@ -22,12 +22,18 @@ import java.io.File;
 public class Open extends CordovaPlugin {
 
     public static final String OPEN_ACTION = "open";
+    public static final String SHAREFILE_ACTION = "sharefile";
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals(OPEN_ACTION)) {
             String path = args.getString(0);
             this.chooseIntent(path, callbackContext);
+            return true;
+        }
+        else if (action.equals(SHAREFILE_ACTION)) {
+            String path = args.getString(0);
+            this.chooseIntentShareFile(path, callbackContext);
             return true;
         }
         return false;
@@ -81,6 +87,48 @@ public class Open extends CordovaPlugin {
                 }
 
                 cordova.getActivity().startActivity(fileIntent);
+
+                callbackContext.success();
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+                callbackContext.error(1);
+            }
+        } else {
+            callbackContext.error(2);
+        }
+    }
+    /**
+     * Creates an intent for the data of mime type
+     *
+     * @param path
+     * @param callbackContext
+     */
+
+    private void chooseIntentShareFile(String path, CallbackContext callbackContext) {
+        if (path != null && path.length() > 0) {
+            try {
+                Uri uri = Uri.parse(path);
+                String mime = getMimeType(path);
+                Intent fileIntent = new Intent(Intent.ACTION_VIEW);
+                Intent shareIntent = new Intent();
+                if (Build.VERSION.SDK_INT >= 22) {
+                    Context context = cordova.getActivity().getApplicationContext();
+                    File imageFile = new File(uri.getPath());
+                    Uri photoURI = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", imageFile);
+                    fileIntent.setDataAndTypeAndNormalize(photoURI, mime);
+
+
+                  shareIntent.setAction(Intent.ACTION_SEND);
+                  shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
+                  shareIntent.setType(mime);
+
+
+                    
+                    fileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                }
+
+
+                cordova.getActivity().startActivity(Intent.createChooser(shareIntent,""));
 
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
