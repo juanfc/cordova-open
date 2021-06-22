@@ -10,7 +10,8 @@ cordova-open
 ## Install
 
 ```bash
-$ cordova plugin add cordova-open
+$git clone https://github.com/juanfc/cordova-open.git
+$cordova plugin add  cordova-open --link
 ```
 
 ## Usage
@@ -50,11 +51,52 @@ function progress(progressEvent) {
 open('file:/storage/sdcard/DCIM/Camera/1404177327783.jpg', success, error, progress);
 ```
 
+## Usage
+
+```javascript
+var open = cordova.plugins.disusered.shareFile;
+
+function success() {
+  console.log('Success');
+}
+
+function error(code) {
+  if (code === 1) {
+    console.log('No file handler found');
+  } else {
+    console.log('Undefined error');
+  }
+}
+
+function progress(progressEvent) {
+  if (progressEvent.lengthComputable) {
+    var perc = Math.floor(progressEvent.loaded / progressEvent.total * 100);
+    // update UI with status, for example:
+    // statusDom.innerHTML = perc + "% loaded...";
+  } else {
+    // download does not offer a length... just show dots
+    /*
+       if(statusDom.innerHTML == "") {
+       statusDom.innerHTML = "Loading";
+       } else {
+       statusDom.innerHTML += ".";
+       }
+     */
+  }
+};
+
+open('file:/storage/sdcard/DCIM/Camera/1404177327783.jpg', success, error, progress);
+```
+
 ## API
 The plugin exposes the following methods:
+*shareFile (Only for Android Api >=22)
 
 ```javascript
 cordova.plugins.disusered.open(file, success, error, progress, trustAllCertificates)
+```
+```javascript
+cordova.plugins.disusered.shareFile(file, success, error, progress, trustAllCertificates)
 ```
 
 #### Parameters:
@@ -71,5 +113,7 @@ cordova.plugins.disusered.open(file, success, error, progress, trustAllCertifica
 * __open.error:__ File not found, or no file handler is installed
 
 ## License
+
+
 
 MIT © [Carlos Rosquillas](http://carlosanton.io)
