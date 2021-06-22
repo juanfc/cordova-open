@@ -3,7 +3,7 @@ cordova-open
 
 [![Build Status](https://travis-ci.org/disusered/cordova-open.svg)](https://travis-ci.org/disusered/cordova-open) [![Code Climate](https://codeclimate.com/github/disusered/cordova-open/badges/gpa.svg)](https://codeclimate.com/github/disusered/cordova-open) 
 
-> Open audio, video, images and more with applications installed on the user's device.
+> Open & Share audio, video, images and more with applications installed on the user's device.
 
 <img src="https://raw.githubusercontent.com/disusered/cordova-open/docs/open.png" width="300px" />
 <img src="https://github.com/juanfc/cordova-open/blob/develop/shareFile.png" width="300px" />
