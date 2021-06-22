@@ -6,6 +6,7 @@ cordova-open
 > Open audio, video, images and more with applications installed on the user's device.
 
 <img src="https://raw.githubusercontent.com/disusered/cordova-open/docs/open.png" width="300px" />
+<img src="https://github.com/juanfc/cordova-open/blob/develop/shareFile.png" width="300px" />
 
 ## Install
 
@@ -14,7 +15,7 @@ $git clone https://github.com/juanfc/cordova-open.git
 $cordova plugin add  cordova-open --link
 ```
 
-## Usage
+## Usage open
 
 ```javascript
 var open = cordova.plugins.disusered.open;
@@ -51,7 +52,7 @@ function progress(progressEvent) {
 open('file:/storage/sdcard/DCIM/Camera/1404177327783.jpg', success, error, progress);
 ```
 
-## Usage
+## Usage shareFile
 
 ```javascript
 var open = cordova.plugins.disusered.shareFile;
