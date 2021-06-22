@@ -3,6 +3,11 @@ cordova-open
 
 [![Build Status](https://travis-ci.org/disusered/cordova-open.svg)](https://travis-ci.org/disusered/cordova-open) [![Code Climate](https://codeclimate.com/github/disusered/cordova-open/badges/gpa.svg)](https://codeclimate.com/github/disusered/cordova-open) 
 
+Forked https://github.com/disusered/cordova-open
+
+I implemented file share to: <app>
+
+
 > Open & Share audio, video, images and more with applications installed on the user's device.
 
 <img src="https://raw.githubusercontent.com/disusered/cordova-open/docs/open.png" width="300px" />
@@ -13,6 +18,10 @@ cordova-open
 ```bash
 $git clone https://github.com/juanfc/cordova-open.git
 $cordova plugin add  cordova-open --link
+
+or
+
+$cordova plugin add https://github.com/juanfc/cordova-open.git
 ```
 
 ## Usage open
@@ -86,7 +95,7 @@ function progress(progressEvent) {
   }
 };
 
-open('file:/storage/sdcard/DCIM/Camera/1404177327783.jpg', success, error, progress);
+open(cordova.file.externalCacheDirectory +fileName, success, error, progress);
 ```
 
 ## API
